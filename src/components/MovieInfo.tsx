@@ -8,7 +8,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 
-import type { Movie } from 'src/models/Movie';
+import type { Movie } from 'src/models';
 
 const InfoRow = styled('div')(({ theme }) => ({
   display: 'flex',
