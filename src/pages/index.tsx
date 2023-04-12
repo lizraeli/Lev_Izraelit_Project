@@ -55,10 +55,10 @@ const Content = () => (
         }}
       >
         <TopLink href={'/movies'}>Movies</TopLink>
-        <TopLink href={'/quotes'}>Quotes</TopLink>
+        <TopLink href={'/characters'}>Characters</TopLink>
       </Box>
       <Typography sx={{ fontSize: '24px', padding: '20px', marginTop: '40px' }}>
-        Lord of the Rings: Movies & Quotes
+        Lord of the Rings: Movies, Characters & Quotes
       </Typography>
     </Box>
   </div>
