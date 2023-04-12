@@ -7,7 +7,7 @@ interface MoviesResponse {
 }
 
 export const getMovies = async (): Promise<Movie[]> => {
-  const res = await fetchWithAuth(urls.movies);
+  const res = await fetchWithAuth(urls.movies());
   const data = (await res.json()) as MoviesResponse;
 
   return data.docs;
@@ -39,9 +39,9 @@ interface CharactersResponse {
   docs: Character[];
 }
 
-export const getCharacters = async (): Promise<Character[]> => {
-  const res = await fetchWithAuth(urls.characters);
-  const data = (await res.json()) as CharactersResponse;
+export const getCharacters = async (page = 1): Promise<Character[]> => {
+  const res = await fetchWithAuth(urls.characters());
+  const data = (await res.json()) as CharacterResponse;
 
   return data.docs;
 };

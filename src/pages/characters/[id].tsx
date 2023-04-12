@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import type { FunctionComponent } from 'react';
 import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
+import Pagination from '@mui/material/Pagination';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 
@@ -11,6 +11,7 @@ import BreadCrumbs from 'src/components/BreadCrumbs';
 import QuoteInfo from 'src/components/QuoteInfo';
 import ListContainer from 'src/components/ListContainer';
 import CharacterInfo from 'src/components/CharacterInfo';
+import { usePaginationRange } from 'src/hooks/pagination';
 
 type Props = {
   character: Character;
@@ -48,6 +49,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 };
 
 const Movie: FunctionComponent<Props> = ({ character, quotes, error }) => {
+  const {
+    currentItems: currentQuotes,
+    currentPage,
+    setCurrentPage,
+    pageCount,
+  } = usePaginationRange(quotes);
+
   return (
     <Box
       sx={{
@@ -86,7 +94,7 @@ const Movie: FunctionComponent<Props> = ({ character, quotes, error }) => {
             <Alert severity="error">Error fetching movie info</Alert>
           ) : (
             <>
-              <CharacterInfo character={character} />
+              <CharacterInfo character={character} linkToWiki />
               <Box
                 sx={{
                   marginTop: '40px',
@@ -96,7 +104,7 @@ const Movie: FunctionComponent<Props> = ({ character, quotes, error }) => {
                   alignItems: 'center',
                 }}
               >
-                {quotes.length === 0 ? (
+                {currentQuotes.length === 0 ? (
                   <Alert severity="info">No quotes to display</Alert>
                 ) : (
                   <>
@@ -108,7 +116,7 @@ const Movie: FunctionComponent<Props> = ({ character, quotes, error }) => {
                         width: '100%',
                       }}
                     >
-                      {quotes.map((quote) => (
+                      {currentQuotes.map((quote) => (
                         <QuoteInfo
                           key={quote._id}
                           quote={quote}
@@ -118,6 +126,11 @@ const Movie: FunctionComponent<Props> = ({ character, quotes, error }) => {
                     </ListContainer>
                   </>
                 )}
+                <Pagination
+                  page={currentPage}
+                  count={pageCount}
+                  onChange={(_e, page) => setCurrentPage(page)}
+                />
               </Box>
             </>
           )}

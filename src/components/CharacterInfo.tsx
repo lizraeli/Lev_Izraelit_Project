@@ -30,9 +30,10 @@ const InfoRow = styled('div')(({ theme }) => ({
   marginBottom: '5px',
 }));
 
-const CharacterInfo: FunctionComponent<{ character: Character }> = ({
-  character,
-}) => (
+const CharacterInfo: FunctionComponent<{
+  character: Character;
+  linkToWiki?: boolean;
+}> = ({ character, linkToWiki }) => (
   <Container>
     <Typography sx={{ fontSize: '18px', marginBottom: '20px' }}>
       {character.name}
@@ -76,7 +77,11 @@ const CharacterInfo: FunctionComponent<{ character: Character }> = ({
     {character.wikiUrl && (
       <InfoRow>
         <LanguageIcon /> Wiki URL:{' '}
-        <Link href={character.wikiUrl}>{character.wikiUrl}</Link>
+        {linkToWiki ? (
+          <Link href={character.wikiUrl}>{character.wikiUrl}</Link>
+        ) : (
+          character.wikiUrl
+        )}
       </InfoRow>
     )}
   </Container>
