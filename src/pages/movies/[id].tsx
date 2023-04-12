@@ -12,11 +12,12 @@ import MovieInfo from 'src/components/MovieInfo';
 import QuoteInfo from 'src/components/QuoteInfo';
 import ListContainer from 'src/components/ListContainer';
 import { usePaginationRange } from 'src/hooks/pagination';
+import { getMessageFromError } from 'src/utils/error';
 
 type Props = {
   movie: Movie;
   quotes: Quote[];
-  error?: boolean;
+  error?: string;
 };
 
 const emptyMovie: Movie = {
@@ -40,8 +41,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     const quotes = await getMovieQuotes(movieId);
 
     return { props: { movie, quotes } };
-  } catch {
-    return { props: { error: true, movie: emptyMovie, quotes: [] } };
+  } catch (err) {
+    return {
+      props: { error: getMessageFromError(err), movie: emptyMovie, quotes: [] },
+    };
   }
 };
 
@@ -89,7 +92,7 @@ const Movie: FunctionComponent<Props> = ({ movie, quotes, error }) => {
           }}
         >
           {error ? (
-            <Alert severity="error">Error fetching movie info</Alert>
+            <Alert severity="error">Error fetching movie info: {error}</Alert>
           ) : (
             <>
               <MovieInfo movie={movie} />

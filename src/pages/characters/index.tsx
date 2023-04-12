@@ -13,10 +13,11 @@ import BreadCrumbs from 'src/components/BreadCrumbs';
 import CharacterInfo from 'src/components/CharacterInfo';
 import ListContainer from 'src/components/ListContainer';
 import { usePaginationRange } from 'src/hooks/pagination';
+import { getMessageFromError } from 'src/utils/error';
 
 interface Props {
   characters: Character[];
-  error?: boolean;
+  error?: string;
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
@@ -25,7 +26,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
     return { props: { characters } };
   } catch (err) {
-    return { props: { characters: [], error: true } };
+    return { props: { characters: [], error: getMessageFromError(err) } };
   }
 };
 

@@ -11,10 +11,11 @@ import { getMovies } from 'src/the-one-api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 import MovieInfo from 'src/components/MovieInfo';
 import ListContainer from 'src/components/ListContainer';
+import { getMessageFromError } from 'src/utils/error';
 
 interface Props {
   movies: Movie[];
-  error?: boolean;
+  error?: string;
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
@@ -22,7 +23,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     const movies = await getMovies();
     return { props: { movies } };
   } catch (err) {
-    return { props: { movies: [], error: true } };
+    return { props: { movies: [], error: getMessageFromError(err) } };
   }
 };
 
@@ -42,7 +43,7 @@ const Page: NextPage<Props> = ({ movies, error }) => {
       >
         Movie adapations of the Lord of the Rings
       </Typography>
-      {error && <Alert severity="error">Error fetching movies</Alert>}
+      {error && <Alert severity="error">Error fetching movies: {error}</Alert>}
       <ListContainer>
         {movies.map((movie) => (
           <Card key={movie._id} variant="outlined" sx={{ width: '100%' }}>
