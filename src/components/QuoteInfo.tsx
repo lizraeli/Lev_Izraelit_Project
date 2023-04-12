@@ -15,10 +15,10 @@ const QuoteInfo: FunctionComponent<Props> = ({ quote, linkTo }) => {
   let href: string, tooltipText: string;
   if (linkTo === 'movie') {
     href = `/movies/${quote.movie}`;
-    tooltipText = 'Go to movie where this was uttered';
+    tooltipText = 'Go to the movie where this was uttered';
   } else {
     href = `/characters/${quote.character}`;
-    tooltipText = 'Go to character who said this';
+    tooltipText = 'Go to the character who said this';
   }
 
   return (
