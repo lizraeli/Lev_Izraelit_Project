@@ -1,9 +1,9 @@
-const API_KEY = process.env.API_KEY;
+const THE_ONE_API_KEY = process.env.THE_ONE_API_KEY;
 
 export const fetchWithAuth = async (url: string): Promise<Response> => {
   const response = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${THE_ONE_API_KEY}`,
       Accept: 'application/json, text/plain, */*',
       'User-Agent': '*',
     },

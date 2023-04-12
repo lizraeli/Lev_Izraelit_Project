@@ -7,7 +7,7 @@ import Alert from '@mui/material/Alert';
 import NextLink from 'next/link';
 
 import type { Movie } from 'src/models';
-import { getMovies } from 'src/api/requests';
+import { getMovies } from 'src/the-one-api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 import MovieInfo from 'src/components/MovieInfo';
 import ListContainer from 'src/components/ListContainer';

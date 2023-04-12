@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 
 import type { Character, Movie, Quote } from 'src/models';
-import { getCharacter, getCharacterQuotes } from 'src/api/requests';
+import { getCharacter, getCharacterQuotes } from 'src/the-one-api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 import QuoteInfo from 'src/components/QuoteInfo';
 import ListContainer from 'src/components/ListContainer';

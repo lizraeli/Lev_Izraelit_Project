@@ -8,7 +8,7 @@ import Pagination from '@mui/material/Pagination';
 import NextLink from 'next/link';
 
 import type { Character } from 'src/models';
-import { getCharacters } from 'src/api/requests';
+import { getCharacters } from 'src/the-one-api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 import CharacterInfo from 'src/components/CharacterInfo';
 import ListContainer from 'src/components/ListContainer';

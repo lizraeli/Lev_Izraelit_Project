@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 
 import type { Movie, Quote } from 'src/models';
-import { getMovie, getMovieQuotes } from 'src/api/requests';
+import { getMovie, getMovieQuotes } from 'src/the-one-api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 import MovieInfo from 'src/components/MovieInfo';
 import QuoteInfo from 'src/components/QuoteInfo';
