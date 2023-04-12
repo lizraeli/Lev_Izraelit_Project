@@ -1,11 +1,8 @@
 import Head from 'next/head';
-import styles from 'src/styles/Home.module.css';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import NextLink from 'next/link';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
-import Divider from '@mui/material/Divider';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
 interface TopLinkProps extends PropsWithChildren {
@@ -50,14 +47,21 @@ const Content = () => (
           flexDirection: 'row',
           alignItems: 'center',
           marginTop: '40px',
-
           gap: '20px',
         }}
       >
         <TopLink href={'/movies'}>Movies</TopLink>
         <TopLink href={'/characters'}>Characters</TopLink>
       </Box>
-      <Typography sx={{ fontSize: '24px', padding: '20px', marginTop: '40px' }}>
+      <Typography
+        sx={{
+          fontSize: '1.5em',
+          padding: '20px',
+          marginTop: '40px',
+          marginLeft: '20px',
+          marginRight: '20px',
+        }}
+      >
         Lord of the Rings: Movies, Characters & Quotes
       </Typography>
     </Box>
