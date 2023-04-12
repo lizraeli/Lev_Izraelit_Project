@@ -80,7 +80,6 @@ const Movie: FunctionComponent<Props> = ({ movie, quotes, error }) => {
             alignItems: 'center',
           }}
         >
-          {' '}
           {error ? (
             <Alert severity="error">Error fetching movie info</Alert>
           ) : (
