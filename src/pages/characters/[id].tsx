@@ -1,32 +1,35 @@
 import type { GetServerSideProps } from 'next';
-import { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 
-import type { Movie, Quote } from 'src/models';
-import { getMovie, getMovieQuotes } from 'src/api/requests';
+import type { Character, Movie, Quote } from 'src/models';
+import { getCharacter, getCharacterQuotes } from 'src/api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
-import MovieInfo from 'src/components/MovieInfo';
 import QuoteInfo from 'src/components/MovieQuotes';
 import ListContainer from 'src/components/ListContainer';
+import CharacterInfo from 'src/components/CharacterInfo';
 
 type Props = {
-  movie: Movie;
+  character: Character;
   quotes: Quote[];
   error?: boolean;
 };
 
-const emptyMovie: Movie = {
+const emptyCharacter: Character = {
   _id: '',
+  height: '',
+  race: '',
+  gender: '',
+  birth: '',
+  spouse: '',
+  death: '',
+  realm: '',
+  hair: '',
   name: '',
-  runtimeInMinutes: 0,
-  budgetInMillions: 0,
-  boxOfficeRevenueInMillions: 0,
-  academyAwardNominations: 0,
-  academyAwardWins: 0,
-  rottenTomatoesScore: 0,
+  wikiUrl: '',
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (
@@ -35,16 +38,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   const characterId = context.query.id as string;
 
   try {
-    const movie = await getMovie(movieId);
-    const quotes = await getMovieQuotes(movieId);
+    const character = await getCharacter(characterId);
+    const quotes = await getCharacterQuotes(characterId);
 
-    return { props: { movie, quotes } };
+    return { props: { character, quotes } };
   } catch {
-    return { props: { error: true, movie: emptyMovie, quotes: [] } };
+    return { props: { error: true, character: emptyCharacter, quotes: [] } };
   }
 };
 
-const Movie: FunctionComponent<Props> = ({ movie, quotes, error }) => {
+const Movie: FunctionComponent<Props> = ({ character, quotes, error }) => {
   return (
     <Box
       sx={{
@@ -65,11 +68,10 @@ const Movie: FunctionComponent<Props> = ({ movie, quotes, error }) => {
         <BreadCrumbs
           crumbs={[
             { text: 'Home', link: '/' },
-            { text: 'Movies', link: '/movies' },
+            { text: 'Characters', link: '/characters' },
           ]}
-          current={movie.name}
+          current={character.name}
         />
-
         <Box
           sx={{
             marginTop: '40px',
@@ -80,12 +82,11 @@ const Movie: FunctionComponent<Props> = ({ movie, quotes, error }) => {
             alignItems: 'center',
           }}
         >
-          {' '}
           {error ? (
             <Alert severity="error">Error fetching movie info</Alert>
           ) : (
             <>
-              <MovieInfo movie={movie} />
+              <CharacterInfo character={character} />
               <Box
                 sx={{
                   marginTop: '40px',

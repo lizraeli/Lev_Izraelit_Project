@@ -51,7 +51,7 @@ const Page: NextPage<Props> = ({ characters, error }) => {
             <CardActionArea
               sx={{ padding: '20px' }}
               LinkComponent={NextLink}
-              href={`/character/${character._id}`}
+              href={`/characters/${character._id}`}
             >
               <CharacterInfo character={character} />
             </CardActionArea>
