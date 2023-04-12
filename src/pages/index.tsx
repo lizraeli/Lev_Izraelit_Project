@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import NextLink from 'next/link';
 import Link from '@mui/material/Link';
+import NextLink from 'next/link';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
 interface TopLinkProps extends PropsWithChildren {

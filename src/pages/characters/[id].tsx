@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert';
 import type { Character, Movie, Quote } from 'src/models';
 import { getCharacter, getCharacterQuotes } from 'src/api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
-import QuoteInfo from 'src/components/MovieQuotes';
+import QuoteInfo from 'src/components/QuoteInfo';
 import ListContainer from 'src/components/ListContainer';
 import CharacterInfo from 'src/components/CharacterInfo';
 
@@ -109,13 +109,11 @@ const Movie: FunctionComponent<Props> = ({ character, quotes, error }) => {
                       }}
                     >
                       {quotes.map((quote) => (
-                        <Card
+                        <QuoteInfo
                           key={quote._id}
-                          variant="outlined"
-                          sx={{ width: '100%' }}
-                        >
-                          <QuoteInfo quote={quote} />
-                        </Card>
+                          quote={quote}
+                          linkTo="movie"
+                        />
                       ))}
                     </ListContainer>
                   </>

@@ -9,7 +9,7 @@ import type { Movie, Quote } from 'src/models';
 import { getMovie, getMovieQuotes } from 'src/api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 import MovieInfo from 'src/components/MovieInfo';
-import QuoteInfo from 'src/components/MovieQuotes';
+import QuoteInfo from 'src/components/QuoteInfo';
 import ListContainer from 'src/components/ListContainer';
 
 type Props = {
@@ -107,13 +107,11 @@ const Movie: FunctionComponent<Props> = ({ movie, quotes, error }) => {
                       }}
                     >
                       {quotes.map((quote) => (
-                        <Card
+                        <QuoteInfo
                           key={quote._id}
-                          variant="outlined"
-                          sx={{ width: '100%' }}
-                        >
-                          <QuoteInfo quote={quote} />
-                        </Card>
+                          quote={quote}
+                          linkTo="character"
+                        />
                       ))}
                     </ListContainer>
                   </>
