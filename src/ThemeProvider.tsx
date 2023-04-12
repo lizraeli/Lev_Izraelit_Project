@@ -12,12 +12,6 @@ const theme = createTheme({
     primary: {
       main: '#14322B',
     },
-    secondary: {
-      main: '#14322B',
-    },
-    background: {
-      // default: '#edf0f3',
-    },
   },
   typography: {
     fontFamily: ['Abyssinica SIL', 'serif'].join(', '),
