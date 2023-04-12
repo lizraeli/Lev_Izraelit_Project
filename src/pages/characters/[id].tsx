@@ -32,7 +32,7 @@ const emptyMovie: Movie = {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
-  const movieId = context.query.id as string;
+  const characterId = context.query.id as string;
 
   try {
     const movie = await getMovie(movieId);

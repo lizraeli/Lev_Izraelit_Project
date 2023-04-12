@@ -17,8 +17,8 @@ interface MovieResponse {
   docs: Movie[];
 }
 
-export const getMovie = async (movieUuid: string): Promise<Movie> => {
-  const res = await fetchWithAuth(urls.movie(movieUuid));
+export const getMovie = async (movieId: string): Promise<Movie> => {
+  const res = await fetchWithAuth(urls.movie(movieId));
   const data = (await res.json()) as MovieResponse;
 
   return data.docs[0];
@@ -28,9 +28,20 @@ interface MovieQuotesResponse {
   docs: Quote[];
 }
 
-export const getMovieQuotes = async (movieUuid: string): Promise<Quote[]> => {
-  const res = await fetchWithAuth(urls.movieQuotes(movieUuid));
+export const getMovieQuotes = async (movieId: string): Promise<Quote[]> => {
+  const res = await fetchWithAuth(urls.movieQuotes(movieId));
   const data = (await res.json()) as MovieQuotesResponse;
+
+  return data.docs;
+};
+
+interface CharactersResponse {
+  docs: Character[];
+}
+
+export const getCharacters = async (): Promise<Character[]> => {
+  const res = await fetchWithAuth(urls.characters);
+  const data = (await res.json()) as CharactersResponse;
 
   return data.docs;
 };
@@ -39,9 +50,22 @@ interface CharacterResponse {
   docs: Character[];
 }
 
-export const getCharacters = async (): Promise<Character[]> => {
-  const res = await fetchWithAuth(urls.characters);
+export const getCharacter = async (characterId: string): Promise<Character> => {
+  const res = await fetchWithAuth(urls.character(characterId));
   const data = (await res.json()) as CharacterResponse;
+
+  return data.docs[0];
+};
+
+interface CharacterQuotesResponse {
+  docs: Quote[];
+}
+
+export const getCharacterQuotes = async (
+  characterId: string
+): Promise<Quote[]> => {
+  const res = await fetchWithAuth(urls.characterQuotes(characterId));
+  const data = (await res.json()) as CharacterQuotesResponse;
 
   return data.docs;
 };

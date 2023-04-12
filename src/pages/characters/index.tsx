@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -17,7 +17,7 @@ interface Props {
   error?: boolean;
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   try {
     const characters = await getCharacters();
 
@@ -37,18 +37,21 @@ const Page: NextPage<Props> = ({ characters, error }) => {
         alignItems: 'center',
       }}
     >
-      <BreadCrumbs crumbs={[{ text: 'Home', link: '/' }]} current="Movies" />
+      <BreadCrumbs
+        crumbs={[{ text: 'Home', link: '/' }]}
+        current="Characters"
+      />
       <Typography sx={{ fontSize: '24px', padding: '20px', marginTop: '40px' }}>
         Characters in the Lord of the Rings
       </Typography>
       {error && <Alert severity="error">Error fetching characters</Alert>}
-      <ListContainer>
+      <ListContainer sx={{ width: '100%' }}>
         {characters.map((character) => (
           <Card key={character._id} variant="outlined" sx={{ width: '100%' }}>
             <CardActionArea
               sx={{ padding: '20px' }}
               LinkComponent={NextLink}
-              href={`/movies/${character._id}`}
+              href={`/character/${character._id}`}
             >
               <CharacterInfo character={character} />
             </CardActionArea>

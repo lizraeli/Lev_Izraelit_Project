@@ -9,7 +9,7 @@ export const fetchWithAuth = async (url: string): Promise<Response> => {
     },
   });
 
-  if (response.status <= 400) {
+  if (response.status >= 400) {
     throw new Error(response.statusText);
   }
 
