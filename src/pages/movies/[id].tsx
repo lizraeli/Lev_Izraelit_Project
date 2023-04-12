@@ -129,6 +129,9 @@ const Movie: FunctionComponent<Props> = ({ movie, quotes, error }) => {
                       page={currentPage}
                       count={pageCount}
                       onChange={(_e, page) => setCurrentPage(page)}
+                      sx={{
+                        marginBottom: '20px',
+                      }}
                     />
                   </>
                 )}

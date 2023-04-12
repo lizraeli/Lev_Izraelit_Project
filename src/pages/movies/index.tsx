@@ -1,10 +1,13 @@
 import type { GetStaticProps, NextPage } from 'next';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
-import NextLink from 'next/link';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import type { Movie } from 'src/models';
 import { getMovies } from 'src/the-one-api/requests';
@@ -28,6 +31,15 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 };
 
 const Page: NextPage<Props> = ({ movies, error }) => {
+  const router = useRouter();
+  const [isLoadingMovie, setIsLoadingMovie] = useState(false);
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', (events) => {
+      setIsLoadingMovie(true);
+    });
+  }, [router]);
+
   return (
     <Box
       sx={{
@@ -41,22 +53,27 @@ const Page: NextPage<Props> = ({ movies, error }) => {
       <Typography
         sx={{ fontSize: '1.5em', padding: '20px', marginTop: '40px' }}
       >
-        Movie adapations of the Lord of the Rings
+        {isLoadingMovie
+          ? 'Loading movie info...'
+          : 'Movie adapations of the Lord of the Rings'}
       </Typography>
+      {isLoadingMovie && <CircularProgress />}
       {error && <Alert severity="error">Error fetching movies: {error}</Alert>}
-      <ListContainer>
-        {movies.map((movie) => (
-          <Card key={movie._id} variant="outlined" sx={{ width: '100%' }}>
-            <CardActionArea
-              sx={{ padding: '20px' }}
-              LinkComponent={NextLink}
-              href={`/movies/${movie._id}`}
-            >
-              <MovieInfo movie={movie} />
-            </CardActionArea>
-          </Card>
-        ))}
-      </ListContainer>
+      {!isLoadingMovie && (
+        <ListContainer>
+          {movies.map((movie) => (
+            <Card key={movie._id} variant="outlined" sx={{ width: '100%' }}>
+              <CardActionArea
+                sx={{ padding: '20px' }}
+                LinkComponent={NextLink}
+                href={`/movies/${movie._id}`}
+              >
+                <MovieInfo movie={movie} />
+              </CardActionArea>
+            </Card>
+          ))}
+        </ListContainer>
+      )}
     </Box>
   );
 };
