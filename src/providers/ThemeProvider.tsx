@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from 'react';
-import { red } from '@mui/material/colors';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
   ThemeProvider as MUIThemeProvider,
