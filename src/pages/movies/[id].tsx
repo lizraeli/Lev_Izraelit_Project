@@ -122,13 +122,13 @@ const Movie: FunctionComponent<Props> = ({ movie, quotes, error }) => {
                         />
                       ))}
                     </ListContainer>
+                    <Pagination
+                      page={currentPage}
+                      count={pageCount}
+                      onChange={(_e, page) => setCurrentPage(page)}
+                    />
                   </>
                 )}
-                <Pagination
-                  page={currentPage}
-                  count={pageCount}
-                  onChange={(_e, page) => setCurrentPage(page)}
-                />
               </Box>
             </>
           )}
