@@ -37,7 +37,9 @@ const Page: NextPage<Props> = ({ movies, error }) => {
       }}
     >
       <BreadCrumbs crumbs={[{ text: 'Home', link: '/' }]} current="Movies" />
-      <Typography sx={{ fontSize: '24px', padding: '20px', marginTop: '40px' }}>
+      <Typography
+        sx={{ fontSize: '1.5em', padding: '20px', marginTop: '40px' }}
+      >
         Movie adapations of the Lord of the Rings
       </Typography>
       {error && <Alert severity="error">Error fetching movies</Alert>}

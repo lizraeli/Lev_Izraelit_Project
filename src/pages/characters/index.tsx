@@ -50,7 +50,9 @@ const Page: NextPage<Props> = ({ characters, error }) => {
         crumbs={[{ text: 'Home', link: '/' }]}
         current="Characters"
       />
-      <Typography sx={{ fontSize: '24px', padding: '20px', marginTop: '40px' }}>
+      <Typography
+        sx={{ fontSize: '1.5em', padding: '20px', marginTop: '40px' }}
+      >
         Characters in the Lord of the Rings
       </Typography>
       {error && <Alert severity="error">Error fetching characters</Alert>}
