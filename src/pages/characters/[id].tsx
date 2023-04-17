@@ -34,14 +34,18 @@ const emptyCharacter: Character = {
   wikiUrl: '',
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context
-) => {
-  const characterId = context.query.id as string;
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  res,
+  query,
+}) => {
+  const characterId = query.id as string;
 
   try {
     const character = await getCharacter(characterId);
     const quotes = await getCharacterQuotes(characterId);
+
+    // cache the response on the NextJS server for 7 days
+    res.setHeader('Cache-Control', 'public s-max-age=604800');
 
     return { props: { character, quotes } };
   } catch (err) {
