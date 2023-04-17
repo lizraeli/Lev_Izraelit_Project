@@ -1,4 +1,4 @@
-import type { GetServerSideProps } from 'next';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { FunctionComponent } from 'react';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 
 import type { Movie, Quote } from 'src/models';
-import { getMovie, getMovieQuotes } from 'src/the-one-api/requests';
+import { getMovie, getMovies, getMovieQuotes } from 'src/the-one-api/requests';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 import MovieInfo from 'src/components/MovieInfo';
 import QuoteInfo from 'src/components/QuoteInfo';
@@ -31,10 +31,18 @@ const emptyMovie: Movie = {
   rottenTomatoesScore: 0,
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context
-) => {
-  const movieId = context.query.id as string;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const movies = await getMovies();
+  const paths = movies.map((movie) => ({ params: { id: movie._id } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const movieId = params?.id as string;
 
   try {
     const movie = await getMovie(movieId);
