@@ -41,7 +41,7 @@ interface CharactersResponse {
 
 export const getCharacters = async (page = 1): Promise<Character[]> => {
   const res = await fetchWithAuth(urls.characters());
-  const data = (await res.json()) as CharacterResponse;
+  const data = (await res.json()) as CharactersResponse;
 
   return data.docs;
 };
